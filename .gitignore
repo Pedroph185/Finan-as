@@ -1,60 +1,15 @@
-# ============================================
 # Python
-# ============================================
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
-.Python
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-*.whl
-
-# ============================================
-# Ambientes virtuais
-# ============================================
 venv/
 env/
-ENV/
-.venv
-virtualenv/
 
-# ============================================
-# Arquivos de dados (evitar subir dados pessoais)
-# ============================================
+# Dados
 *.xlsx
 *.csv
-*.db
-*.sqlite
 outputs/
-*.log
 
-# ============================================
-# Arquivos de configuração com senhas
-# ============================================
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-
-# ============================================
-# IDEs e editores
-# ============================================
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# ============================================
-# Arquivos específicos do projeto Finan-as
-# ============================================
-dashboard.xlsx
-relatorio.json
-relatorio.txt
