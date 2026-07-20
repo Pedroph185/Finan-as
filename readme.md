@@ -6,11 +6,24 @@
 
 > Um aplicativo interativo para controle, análise e visualização de finanças pessoais desenvolvido em Python. O projeto transforma dados brutos de transações em insights visuais para ajudar na tomada de decisões financeiras.
 
+---
+
+## 📸 Demonstração
+
+![Dashboard em funcionamento](./assets/images/terminal-output.png)
+
+*Exemplo da saída do programa no terminal com resumo financeiro e gastos por categoria.*
+
+---
+
 ## 🚀 Funcionalidades
 
-- 📊 **Gráficos Interativos:** Visualização clara de receitas, despesas e saldo acumulado.
+- 📊 **Resumo Financeiro:** Visualização clara de receitas, despesas e saldo acumulado.
 - 🏷️ **Análise de Gastos:** Divisão automática por categorias (alimentação, transporte, lazer, etc.).
 - 📁 **Fácil Integração:** Leitura automatizada de planilhas de dados (`dashboard.xlsx`).
+- 📈 **Relatórios:** Geração de resumo financeiro em formato JSON e TXT.
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -20,14 +33,23 @@
 | **Pandas** | Tratamento e análise de dados |
 | **Openpyxl** | Leitura de planilhas Excel |
 
+---
+
 ## 📦 Como Executar o Projeto
+
+### Pré-requisitos
+
+- Python 3.8 ou superior instalado
+- Pip (gerenciador de pacotes)
+
+### Passo a passo
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/Pedroph185/Financas.git
+git clone https://github.com/Pedroph185/Finan-as.git
 
 # 2. Entre na pasta do projeto
-cd Financas
+cd Finan-as
 
 # 3. Instale as dependências
 pip install -r requirements.txt

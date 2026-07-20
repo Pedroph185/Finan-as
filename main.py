@@ -4,7 +4,43 @@ import os
 from datetime import datetime
 
 # ============================================
-# 1. FUNÇÃO PARA CARREGAR OS DADOS
+# 1. FUNÇÃO PARA CRIAR ARQUIVO DE EXEMPLO
+# ============================================
+
+def criar_arquivo_exemplo():
+    """
+    Cria um arquivo Excel de exemplo com dados financeiros.
+    """
+    dados = {
+        'Data': [
+            '2026-01-01', '2026-01-02', '2026-01-03', '2026-01-04', '2026-01-05',
+            '2026-01-06', '2026-01-07'
+        ],
+        'Descrição': [
+            'Salário', 'Supermercado', 'Aluguel', 'Uber', 'Restaurante',
+            'Cinema', 'Farmácia'
+        ],
+        'Categoria': [
+            'Salário', 'Alimentação', 'Moradia', 'Transporte', 'Lazer',
+            'Lazer', 'Saúde'
+        ],
+        'Tipo': [
+            'Receita', 'Despesa', 'Despesa', 'Despesa', 'Despesa',
+            'Despesa', 'Despesa'
+        ],
+        'Valor': [
+            5000.00, 350.00, 1200.00, 45.00, 120.00,
+            60.00, 80.00
+        ]
+    }
+    
+    df = pd.DataFrame(dados)
+    df.to_excel('dashboard.xlsx', index=False)
+    print("📁 Arquivo de exemplo criado: dashboard.xlsx")
+    return df
+
+# ============================================
+# 2. FUNÇÃO PARA CARREGAR OS DADOS
 # ============================================
 
 def carregar_dados(caminho_arquivo):
@@ -14,16 +50,27 @@ def carregar_dados(caminho_arquivo):
     try:
         df = pd.read_excel(caminho_arquivo)
         print(f"✅ Dados carregados: {len(df)} transações")
+        
+        # Verificar se as colunas necessárias existem
+        colunas_necessarias = ['Data', 'Descrição', 'Categoria', 'Tipo', 'Valor']
+        colunas_faltando = [col for col in colunas_necessarias if col not in df.columns]
+        
+        if colunas_faltando:
+            print(f"⚠️ Colunas faltando: {colunas_faltando}")
+            print("🔄 Criando arquivo de exemplo com o formato correto...")
+            return criar_arquivo_exemplo()
+        
         return df
     except FileNotFoundError:
-        print(f"❌ Arquivo '{caminho_arquivo}' não encontrado!")
-        return None
+        print(f"⚠️ Arquivo '{caminho_arquivo}' não encontrado.")
+        print("🔄 Criando arquivo de exemplo...")
+        return criar_arquivo_exemplo()
     except Exception as e:
         print(f"❌ Erro ao carregar dados: {e}")
         return None
 
 # ============================================
-# 2. FUNÇÕES DE ANÁLISE
+# 3. FUNÇÕES DE ANÁLISE
 # ============================================
 
 def calcular_resumo(df):
@@ -76,7 +123,7 @@ def gerar_relatorio(df):
     }
 
 # ============================================
-# 3. FUNÇÕES PARA SALVAR
+# 4. FUNÇÕES PARA SALVAR
 # ============================================
 
 def salvar_relatorio_json(relatorio, caminho_saida="outputs/relatorio.json"):
@@ -115,7 +162,7 @@ def salvar_relatorio_txt(relatorio, caminho_saida="outputs/relatorio.txt"):
     print(f"✅ Relatório salvo em: {caminho_saida}")
 
 # ============================================
-# 4. FUNÇÃO PRINCIPAL
+# 5. FUNÇÃO PRINCIPAL
 # ============================================
 
 def main():
@@ -123,16 +170,8 @@ def main():
     print("💰 DASHBOARD DE FINANÇAS PESSOAIS")
     print("="*50 + "\n")
     
-    # Verificar se o arquivo existe
-    arquivo = "dashboard.xlsx"
-    if not os.path.exists(arquivo):
-        print(f"⚠️ Arquivo '{arquivo}' não encontrado.")
-        print("Criando um arquivo de exemplo...")
-        criar_arquivo_exemplo()
-        print(f"✅ Arquivo '{arquivo}' criado com dados de exemplo!")
-    
     # Carregar dados
-    df = carregar_dados(arquivo)
+    df = carregar_dados("dashboard.xlsx")
     if df is None:
         return
     
@@ -159,41 +198,6 @@ def main():
     salvar_relatorio_txt(relatorio)
     
     print("\n✅ Análise concluída!")
-
-# ============================================
-# 5. FUNÇÃO PARA CRIAR ARQUIVO DE EXEMPLO
-# ============================================
-
-def criar_arquivo_exemplo():
-    """
-    Cria um arquivo Excel de exemplo com dados financeiros.
-    """
-    dados = {
-        'Data': [
-            '2026-01-01', '2026-01-02', '2026-01-03', '2026-01-04', '2026-01-05',
-            '2026-01-06', '2026-01-07', '2026-01-08', '2026-01-09', '2026-01-10'
-        ],
-        'Descrição': [
-            'Salário', 'Supermercado', 'Aluguel', 'Uber', 'Restaurante',
-            'Cinema', 'Farmácia', 'Salário', 'Gasolina', 'Academia'
-        ],
-        'Categoria': [
-            'Salário', 'Alimentação', 'Moradia', 'Transporte', 'Lazer',
-            'Lazer', 'Saúde', 'Salário', 'Transporte', 'Saúde'
-        ],
-        'Tipo': [
-            'Receita', 'Despesa', 'Despesa', 'Despesa', 'Despesa',
-            'Despesa', 'Despesa', 'Receita', 'Despesa', 'Despesa'
-        ],
-        'Valor': [
-            5000.00, 350.00, 1200.00, 45.00, 120.00,
-            60.00, 80.00, 2000.00, 180.00, 99.00
-        ]
-    }
-    
-    df = pd.DataFrame(dados)
-    df.to_excel('dashboard.xlsx', index=False)
-    print("📁 Arquivo de exemplo criado: dashboard.xlsx")
 
 if __name__ == "__main__":
     main()
