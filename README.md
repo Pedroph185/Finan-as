@@ -10,7 +10,7 @@
 
 ## 📸 Demonstração
 
-![Dashboard em ação](https://i.imgur.com/placeholder.png)
+![Dashboard em funcionamento](./assets/images/terminal-output.png)
 
 *(Adicione aqui um print do dashboard funcionando)*
 
